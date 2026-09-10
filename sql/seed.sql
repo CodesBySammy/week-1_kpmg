@@ -9,12 +9,12 @@
 -- =============================================================================
 
 -- ── Users ───────────────────────────────────────────────────────
-INSERT INTO users (username, email, full_name, role) VALUES
-    ('asingh',   'asingh@example.com',   'Aarav Singh',    'manager'),
-    ('pgupta',   'pgupta@example.com',   'Priya Gupta',    'analyst'),
-    ('rkumar',   'rkumar@example.com',   'Raj Kumar',      'analyst'),
-    ('nreddy',   'nreddy@example.com',   'Neha Reddy',     'senior_analyst'),
-    ('vpatel',   'vpatel@example.com',   'Vikram Patel',   'admin');
+INSERT INTO users (username, email, full_name, role, created_at) VALUES
+    ('asingh',   'asingh@example.com',   'Aarav Singh',    'manager',        datetime('now', '-30 days')),
+    ('pgupta',   'pgupta@example.com',   'Priya Gupta',    'analyst',        datetime('now', '-25 days')),
+    ('rkumar',   'rkumar@example.com',   'Raj Kumar',      'analyst',        datetime('now', '-20 days')),
+    ('nreddy',   'nreddy@example.com',   'Neha Reddy',     'senior_analyst', datetime('now', '-15 days')),
+    ('vpatel',   'vpatel@example.com',   'Vikram Patel',   'admin',          datetime('now', '-10 days'));
 
 
 -- ── Cases ───────────────────────────────────────────────────────
