@@ -42,3 +42,7 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Documents & Curriculum PDFs
+*.pdf
+Fresher AI Training_Curriculam_Sep2026.pdf
