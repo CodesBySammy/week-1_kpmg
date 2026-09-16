@@ -1,0 +1,23 @@
+{
+  "run_id": "RUN_20260916_065903",
+  "reconciled_at": "2026-09-16T06:59:05.822805+00:00",
+  "source_name": "cases_csv",
+  "overall_status": "PASS",
+  "counts": {
+    "source_count": 20,
+    "quarantined_count": 5,
+    "valid_count": 15,
+    "duplicates_removed": 1,
+    "expected_curated": 14,
+    "curated_count": 14
+  },
+  "variance": {
+    "source_variance": 0,
+    "curated_variance": 0
+  },
+  "balance_check": {
+    "source_balanced": true,
+    "curated_balanced": true
+  },
+  "formula": "source_count (100%) == valid_count + quarantined_count"
+}

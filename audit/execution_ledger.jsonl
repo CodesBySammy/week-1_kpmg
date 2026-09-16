@@ -1,3 +1,5 @@
 {"run_id": "RUN_20260916_062733", "batch_id": "BATCH_20260916_0627", "timestamp": "2026-09-16T06:27:35.497083+00:00", "duration_seconds": 2.23, "status": "PASS", "source_count": 20, "curated_count": 14, "rejected_count": 5}
 {"run_id": "RUN_20260916_062855", "batch_id": "BATCH_20260916_0628", "timestamp": "2026-09-16T06:28:58.317384+00:00", "duration_seconds": 2.402, "status": "PASS", "source_count": 20, "curated_count": 14, "rejected_count": 5}
 {"run_id": "TEST_MALFORMED_001", "batch_id": "BATCH_20260916_0629", "timestamp": "2026-09-16T06:29:13.055931+00:00", "duration_seconds": 2.216, "status": "PASS", "source_count": 10, "curated_count": 1, "rejected_count": 8}
+{"run_id": "RUN_20260916_065903", "batch_id": "BATCH_20260916_0659", "timestamp": "2026-09-16T06:59:05.823641+00:00", "duration_seconds": 2.216, "status": "PASS", "source_count": 20, "curated_count": 14, "rejected_count": 5}
+{"run_id": "RUN_20260916_065923", "batch_id": "BATCH_20260916_0659", "timestamp": "2026-09-16T06:59:25.231067+00:00", "duration_seconds": 2.219, "status": "PASS", "source_count": 20, "curated_count": 14, "rejected_count": 5}
