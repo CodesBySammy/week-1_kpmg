@@ -1,0 +1,184 @@
+{
+  "run_id": "TEST_MALFORMED_001",
+  "batch_id": "BATCH_20260916_0629",
+  "quarantined_at": "2026-09-16T06:29:12.988728+00:00",
+  "total_quarantined": 8,
+  "rejected_records": [
+    {
+      "original_record": {
+        "case_id": 201,
+        "title": "",
+        "description": "Missing title field completely",
+        "status": "OPEN",
+        "priority": "HIGH",
+        "case_type": "BUG",
+        "created_by": 1,
+        "assigned_to": 2,
+        "created_at": "2026-09-01 00:00:00+00:00",
+        "updated_at": "2026-09-01 00:00:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "TEST_MALFORMED_001",
+      "rule_id": "RULE-CASE-001",
+      "rule_description": "Case title must be non-null and non-empty",
+      "reason": "Title is null or empty",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:29:12.985998+00:00"
+    },
+    {
+      "original_record": {
+        "case_id": 202,
+        "title": "Invalid status value test",
+        "description": "Has a non-existent status",
+        "status": "INVALID_STATUS_XYZ",
+        "priority": "MEDIUM",
+        "case_type": "BUG",
+        "created_by": 2,
+        "assigned_to": 3,
+        "created_at": "2026-09-01 00:00:00+00:00",
+        "updated_at": "2026-09-01 00:00:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "TEST_MALFORMED_001",
+      "rule_id": "RULE-CASE-002",
+      "rule_description": "Case status must match domain enum (OPEN, IN_PROGRESS, RESOLVED, CLOSED)",
+      "reason": "Status 'INVALID_STATUS_XYZ' not in allowed enum ['OPEN', 'IN_PROGRESS', 'RESOLVED', 'CLOSED']",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:29:12.985998+00:00"
+    },
+    {
+      "original_record": {
+        "case_id": 203,
+        "title": "Invalid priority test",
+        "description": "Has a non-existent priority",
+        "status": "OPEN",
+        "priority": "SUPER_URGENT",
+        "case_type": "BUG",
+        "created_by": 1,
+        "assigned_to": 2,
+        "created_at": "2026-09-01 00:00:00+00:00",
+        "updated_at": "2026-09-01 00:00:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "TEST_MALFORMED_001",
+      "rule_id": "RULE-CASE-003",
+      "rule_description": "Case priority must match domain enum (LOW, MEDIUM, HIGH, CRITICAL)",
+      "reason": "Priority 'SUPER_URGENT' not in allowed enum ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:29:12.985998+00:00"
+    },
+    {
+      "original_record": {
+        "case_id": 204,
+        "title": "Non-existent user reference",
+        "description": "Assigned to non-existent user 9999",
+        "status": "OPEN",
+        "priority": "HIGH",
+        "case_type": "BUG",
+        "created_by": 1,
+        "assigned_to": 9999,
+        "created_at": "2026-09-01 00:00:00+00:00",
+        "updated_at": "2026-09-01 00:00:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "TEST_MALFORMED_001",
+      "rule_id": "RULE-CASE-007",
+      "rule_description": "Case assignee must reference an existing user ID if assigned",
+      "reason": "Assignee user ID 9999 does not exist in reference data",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:29:12.985998+00:00"
+    },
+    {
+      "original_record": {
+        "case_id": 205,
+        "title": "Malformed timestamp format",
+        "description": "Timestamp has unparseable string",
+        "status": "OPEN",
+        "priority": "LOW",
+        "case_type": "INQUIRY",
+        "created_by": 3,
+        "assigned_to": 4,
+        "created_at": "NaT",
+        "updated_at": "2026-09-01 00:00:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "TEST_MALFORMED_001",
+      "rule_id": "RULE-CASE-008",
+      "rule_description": "created_at must be a valid parseable datetime",
+      "reason": "created_at timestamp is null or empty",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:29:12.985998+00:00"
+    },
+    {
+      "original_record": {
+        "case_id": -50,
+        "title": "Negative primary key test",
+        "description": "Key is negative integer",
+        "status": "OPEN",
+        "priority": "LOW",
+        "case_type": "BUG",
+        "created_by": 1,
+        "assigned_to": 2,
+        "created_at": "2026-09-01 00:00:00+00:00",
+        "updated_at": "2026-09-01 00:00:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "TEST_MALFORMED_001",
+      "rule_id": "RULE-CASE-005",
+      "rule_description": "Case ID must be a positive integer greater than zero",
+      "reason": "Case ID -50 is not a positive integer",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:29:12.985998+00:00"
+    },
+    {
+      "original_record": {
+        "case_id": 207,
+        "title": "Invalid case type test",
+        "description": "Case type not in allowed enum",
+        "status": "OPEN",
+        "priority": "LOW",
+        "case_type": "UNSUPPORTED_TYPE",
+        "created_by": 1,
+        "assigned_to": 2,
+        "created_at": "2026-09-01 00:00:00+00:00",
+        "updated_at": "2026-09-01 00:00:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "TEST_MALFORMED_001",
+      "rule_id": "RULE-CASE-004",
+      "rule_description": "Case type must match domain enum (BUG, FEATURE_REQUEST, INQUIRY, COMPLAINT)",
+      "reason": "Case type 'UNSUPPORTED_TYPE' not in allowed enum ['BUG', 'FEATURE_REQUEST', 'INQUIRY', 'COMPLAINT']",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:29:12.985998+00:00"
+    },
+    {
+      "original_record": {
+        "case_id": 208,
+        "title": "Invalid created_by reference",
+        "description": "Creator does not exist in database",
+        "status": "OPEN",
+        "priority": "LOW",
+        "case_type": "BUG",
+        "created_by": 8888,
+        "assigned_to": 2,
+        "created_at": "2026-09-01 00:00:00+00:00",
+        "updated_at": "2026-09-01 00:00:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "TEST_MALFORMED_001",
+      "rule_id": "RULE-CASE-006",
+      "rule_description": "Case creator must reference an existing user ID",
+      "reason": "Creator user ID 8888 does not exist in reference data",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:29:12.985998+00:00"
+    }
+  ]
+}

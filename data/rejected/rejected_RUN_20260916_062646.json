@@ -1,0 +1,118 @@
+{
+  "run_id": "RUN_20260916_062646",
+  "batch_id": "BATCH_20260916_0626",
+  "quarantined_at": "2026-09-16T06:26:48.556279+00:00",
+  "total_quarantined": 5,
+  "rejected_records": [
+    {
+      "original_record": {
+        "case_id": 106,
+        "title": "",
+        "description": "Client report arrived without title headers or incident summary",
+        "status": "OPEN",
+        "priority": "LOW",
+        "case_type": "INQUIRY",
+        "created_by": 2,
+        "assigned_to": 1,
+        "created_at": "2026-09-02 07:20:00+00:00",
+        "updated_at": "2026-09-02 07:20:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "RUN_20260916_062646",
+      "rule_id": "RULE-CASE-001",
+      "rule_description": "Case title must be non-null and non-empty",
+      "reason": "Title is null or empty",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:26:48.548337+00:00"
+    },
+    {
+      "original_record": {
+        "case_id": 110,
+        "title": "Slow query on user profile endpoint",
+        "description": "Query plan shows table scan on user_preferences table",
+        "status": "PENDING_APPROVAL",
+        "priority": "MEDIUM",
+        "case_type": "BUG",
+        "created_by": 4,
+        "assigned_to": 3,
+        "created_at": "2026-09-02 13:00:00+00:00",
+        "updated_at": "2026-09-02 13:00:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "RUN_20260916_062646",
+      "rule_id": "RULE-CASE-002",
+      "rule_description": "Case status must match domain enum (OPEN, IN_PROGRESS, RESOLVED, CLOSED)",
+      "reason": "Status 'PENDING_APPROVAL' not in allowed enum ['OPEN', 'IN_PROGRESS', 'RESOLVED', 'CLOSED']",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:26:48.548337+00:00"
+    },
+    {
+      "original_record": {
+        "case_id": 112,
+        "title": "Data ingestion pipeline backpressure",
+        "description": "Kafka consumer lag exceeded 50000 records on case events",
+        "status": "OPEN",
+        "priority": "HIGH",
+        "case_type": "BUG",
+        "created_by": 3,
+        "assigned_to": 999,
+        "created_at": "2026-09-02 15:00:00+00:00",
+        "updated_at": "2026-09-02 15:00:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "RUN_20260916_062646",
+      "rule_id": "RULE-CASE-007",
+      "rule_description": "Case assignee must reference an existing user ID if assigned",
+      "reason": "Assignee user ID 999 does not exist in reference data",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:26:48.548337+00:00"
+    },
+    {
+      "original_record": {
+        "case_id": 117,
+        "title": "Support ticket routing delay",
+        "description": "Auto-assignment engine lagged by 15 minutes during peak hours",
+        "status": "OPEN",
+        "priority": "URGENT",
+        "case_type": "BUG",
+        "created_by": 3,
+        "assigned_to": 2,
+        "created_at": "2026-09-03 10:00:00+00:00",
+        "updated_at": "2026-09-03 10:00:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "RUN_20260916_062646",
+      "rule_id": "RULE-CASE-003",
+      "rule_description": "Case priority must match domain enum (LOW, MEDIUM, HIGH, CRITICAL)",
+      "reason": "Priority 'URGENT' not in allowed enum ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:26:48.548337+00:00"
+    },
+    {
+      "original_record": {
+        "case_id": -1,
+        "title": "Corrupted row from legacy system migration",
+        "description": "Corrupted header offset and negative primary key",
+        "status": "OPEN",
+        "priority": "LOW",
+        "case_type": "BUG",
+        "created_by": 1,
+        "assigned_to": 1,
+        "created_at": "2026-09-03 11:00:00+00:00",
+        "updated_at": "2026-09-03 11:00:00+00:00",
+        "resolved_at": "NaT"
+      },
+      "source": "cases_csv",
+      "run_id": "RUN_20260916_062646",
+      "rule_id": "RULE-CASE-005",
+      "rule_description": "Case ID must be a positive integer greater than zero",
+      "reason": "Case ID -1 is not a positive integer",
+      "severity": "CRITICAL",
+      "rejected_at": "2026-09-16T06:26:48.548337+00:00"
+    }
+  ]
+}

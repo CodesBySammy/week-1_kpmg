@@ -1,0 +1,53 @@
+{
+  "run_id": "RUN_20260916_062855",
+  "batch_id": "BATCH_20260916_0628",
+  "pipeline_version": "2.0.0",
+  "start_time": "2026-09-16T06:28:55.915765+00:00",
+  "end_time": "2026-09-16T06:28:58.317384+00:00",
+  "duration_seconds": 2.402,
+  "status": "PASS",
+  "sources_ingested": [
+    {
+      "source": "cases_csv",
+      "format": "CSV",
+      "path": "D:\\week1_kpmg\\case-management-backend\\data\\input\\cases.csv",
+      "count": 20
+    },
+    {
+      "source": "reference_json",
+      "format": "JSON",
+      "count": 10
+    },
+    {
+      "source": "policy_parquet",
+      "format": "PARQUET",
+      "count": 9
+    },
+    {
+      "source": "mock_rest_api",
+      "format": "REST_API",
+      "count": 9
+    },
+    {
+      "source": "sqlite_cases",
+      "format": "RELATIONAL_SQLITE",
+      "count": 8
+    }
+  ],
+  "record_counts": {
+    "source_count": 20,
+    "quarantined_count": 5,
+    "valid_count": 15,
+    "duplicates_removed": 1,
+    "curated_count": 14
+  },
+  "output_locations": {
+    "raw_file": "D:\\week1_kpmg\\case-management-backend\\data\\raw\\cases_raw_RUN_20260916_062855.csv",
+    "standardized_file": "D:\\week1_kpmg\\case-management-backend\\data\\standardized\\cases_standardized_RUN_20260916_062855.parquet",
+    "curated_file": "D:\\week1_kpmg\\case-management-backend\\data\\curated\\curated_cases.parquet",
+    "rejected_file": "D:\\week1_kpmg\\case-management-backend\\data\\rejected\\rejected_RUN_20260916_062855.json",
+    "profiling_report": "D:\\week1_kpmg\\case-management-backend\\reports\\profiling\\cases_profile_RUN_20260916_062855.md",
+    "reconciliation_report": "D:\\week1_kpmg\\case-management-backend\\reports\\reconciliation\\reconciliation_RUN_20260916_062855.md"
+  },
+  "errors": []
+}

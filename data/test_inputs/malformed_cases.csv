@@ -1,0 +1,11 @@
+case_id,title,description,status,priority,case_type,created_by,assigned_to,created_at,updated_at,resolved_at
+201,,Missing title field completely,OPEN,HIGH,BUG,1,2,2026-09-01T00:00:00Z,2026-09-01T00:00:00Z,
+202,Invalid status value test,Has a non-existent status,INVALID_STATUS_XYZ,MEDIUM,BUG,2,3,2026-09-01T00:00:00Z,2026-09-01T00:00:00Z,
+203,Invalid priority test,Has a non-existent priority,OPEN,SUPER_URGENT,BUG,1,2,2026-09-01T00:00:00Z,2026-09-01T00:00:00Z,
+204,Non-existent user reference,Assigned to non-existent user 9999,OPEN,HIGH,BUG,1,9999,2026-09-01T00:00:00Z,2026-09-01T00:00:00Z,
+205,Malformed timestamp format,Timestamp has unparseable string,OPEN,LOW,INQUIRY,3,4,NOT_A_VALID_DATE,2026-09-01T00:00:00Z,
+206,Duplicate record primary key,First occurrence,OPEN,LOW,INQUIRY,1,2,2026-09-01T00:00:00Z,2026-09-01T00:00:00Z,
+206,Duplicate record primary key,Second occurrence identical key,OPEN,LOW,INQUIRY,1,2,2026-09-01T00:00:00Z,2026-09-01T00:00:00Z,
+-50,Negative primary key test,Key is negative integer,OPEN,LOW,BUG,1,2,2026-09-01T00:00:00Z,2026-09-01T00:00:00Z,
+207,Invalid case type test,Case type not in allowed enum,OPEN,LOW,UNSUPPORTED_TYPE,1,2,2026-09-01T00:00:00Z,2026-09-01T00:00:00Z,
+208,Invalid created_by reference,Creator does not exist in database,OPEN,LOW,BUG,8888,2,2026-09-01T00:00:00Z,2026-09-01T00:00:00Z,

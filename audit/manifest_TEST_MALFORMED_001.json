@@ -1,0 +1,53 @@
+{
+  "run_id": "TEST_MALFORMED_001",
+  "batch_id": "BATCH_20260916_0629",
+  "pipeline_version": "2.0.0",
+  "start_time": "2026-09-16T06:29:10.839874+00:00",
+  "end_time": "2026-09-16T06:29:13.055931+00:00",
+  "duration_seconds": 2.216,
+  "status": "PASS",
+  "sources_ingested": [
+    {
+      "source": "cases_csv",
+      "format": "CSV",
+      "path": "data\\test_inputs\\malformed_cases.csv",
+      "count": 10
+    },
+    {
+      "source": "reference_json",
+      "format": "JSON",
+      "count": 10
+    },
+    {
+      "source": "policy_parquet",
+      "format": "PARQUET",
+      "count": 9
+    },
+    {
+      "source": "mock_rest_api",
+      "format": "REST_API",
+      "count": 9
+    },
+    {
+      "source": "sqlite_cases",
+      "format": "RELATIONAL_SQLITE",
+      "count": 8
+    }
+  ],
+  "record_counts": {
+    "source_count": 10,
+    "quarantined_count": 8,
+    "valid_count": 2,
+    "duplicates_removed": 1,
+    "curated_count": 1
+  },
+  "output_locations": {
+    "raw_file": "D:\\week1_kpmg\\case-management-backend\\data\\raw\\cases_raw_TEST_MALFORMED_001.csv",
+    "standardized_file": "D:\\week1_kpmg\\case-management-backend\\data\\standardized\\cases_standardized_TEST_MALFORMED_001.parquet",
+    "curated_file": "D:\\week1_kpmg\\case-management-backend\\data\\curated\\curated_cases.parquet",
+    "rejected_file": "D:\\week1_kpmg\\case-management-backend\\data\\rejected\\rejected_TEST_MALFORMED_001.json",
+    "profiling_report": "D:\\week1_kpmg\\case-management-backend\\reports\\profiling\\cases_profile_TEST_MALFORMED_001.md",
+    "reconciliation_report": "D:\\week1_kpmg\\case-management-backend\\reports\\reconciliation\\reconciliation_TEST_MALFORMED_001.md"
+  },
+  "errors": []
+}

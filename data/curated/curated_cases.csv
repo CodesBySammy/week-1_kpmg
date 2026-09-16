@@ -1,0 +1,2 @@
+case_id,title,description,status,priority,case_type,created_by,assigned_to,created_at,updated_at,resolved_at,assignee_tier,assignee_region,assignee_department,policy_id,sla_target_hours,compliance_framework,escalation_tier,resolution_time_hours,sla_breached,priority_duration_rank,department_case_seq
+206,Duplicate record primary key,Second occurrence identical key,OPEN,LOW,INQUIRY,1,2,2026-09-01 00:00:00+00:00,2026-09-01 00:00:00+00:00,,L2,EMEA,Application Engineering,POL-007,48.0,SUPPORT,L1_SUPPORT,366.49,True,1,1

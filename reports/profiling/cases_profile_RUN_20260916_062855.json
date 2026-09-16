@@ -1,0 +1,158 @@
+{
+  "dataset_name": "cases",
+  "profiled_at": "2026-09-16T06:28:58.160514+00:00",
+  "total_records": 20,
+  "total_columns": 11,
+  "columns": [
+    "case_id",
+    "title",
+    "description",
+    "status",
+    "priority",
+    "case_type",
+    "created_by",
+    "assigned_to",
+    "created_at",
+    "updated_at",
+    "resolved_at"
+  ],
+  "completeness": {
+    "case_id": {
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "present_count": 20,
+      "present_percentage": 100.0
+    },
+    "title": {
+      "missing_count": 1,
+      "missing_percentage": 5.0,
+      "present_count": 19,
+      "present_percentage": 95.0
+    },
+    "description": {
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "present_count": 20,
+      "present_percentage": 100.0
+    },
+    "status": {
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "present_count": 20,
+      "present_percentage": 100.0
+    },
+    "priority": {
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "present_count": 20,
+      "present_percentage": 100.0
+    },
+    "case_type": {
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "present_count": 20,
+      "present_percentage": 100.0
+    },
+    "created_by": {
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "present_count": 20,
+      "present_percentage": 100.0
+    },
+    "assigned_to": {
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "present_count": 20,
+      "present_percentage": 100.0
+    },
+    "created_at": {
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "present_count": 20,
+      "present_percentage": 100.0
+    },
+    "updated_at": {
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "present_count": 20,
+      "present_percentage": 100.0
+    },
+    "resolved_at": {
+      "missing_count": 14,
+      "missing_percentage": 70.0,
+      "present_count": 6,
+      "present_percentage": 30.0
+    }
+  },
+  "uniqueness": {
+    "case_id": {
+      "unique_count": 19,
+      "duplicate_count": 1,
+      "uniqueness_ratio": 0.95
+    },
+    "full_row_duplicates": 0
+  },
+  "validity": {
+    "status": {
+      "valid_count": 19,
+      "invalid_count": 1,
+      "invalid_samples": [
+        "PENDING_APPROVAL"
+      ]
+    },
+    "priority": {
+      "valid_count": 19,
+      "invalid_count": 1,
+      "invalid_samples": [
+        "URGENT"
+      ]
+    },
+    "case_type": {
+      "valid_count": 20,
+      "invalid_count": 0,
+      "invalid_samples": []
+    },
+    "numeric_case_id": {
+      "negative_count": 1,
+      "non_numeric_count": 0
+    }
+  },
+  "distribution": {
+    "status": {
+      "OPEN": 9,
+      "IN_PROGRESS": 4,
+      "RESOLVED": 4,
+      "CLOSED": 2,
+      "PENDING_APPROVAL": 1
+    },
+    "priority": {
+      "HIGH": 7,
+      "LOW": 5,
+      "CRITICAL": 4,
+      "MEDIUM": 3,
+      "URGENT": 1
+    },
+    "case_type": {
+      "BUG": 10,
+      "FEATURE_REQUEST": 5,
+      "INQUIRY": 3,
+      "COMPLAINT": 2
+    }
+  },
+  "referential_integrity": {
+    "created_by": {
+      "total_referenced": 20,
+      "valid_references": 20,
+      "orphan_count": 0,
+      "orphan_samples": []
+    },
+    "assigned_to": {
+      "total_referenced": 20,
+      "valid_references": 19,
+      "orphan_count": 1,
+      "orphan_samples": [
+        "999"
+      ]
+    }
+  }
+}

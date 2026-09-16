@@ -1,0 +1,23 @@
+{
+  "run_id": "TEST_MALFORMED_001",
+  "reconciled_at": "2026-09-16T06:29:13.055058+00:00",
+  "source_name": "cases_csv",
+  "overall_status": "PASS",
+  "counts": {
+    "source_count": 10,
+    "quarantined_count": 8,
+    "valid_count": 2,
+    "duplicates_removed": 1,
+    "expected_curated": 1,
+    "curated_count": 1
+  },
+  "variance": {
+    "source_variance": 0,
+    "curated_variance": 0
+  },
+  "balance_check": {
+    "source_balanced": true,
+    "curated_balanced": true
+  },
+  "formula": "source_count (100%) == valid_count + quarantined_count"
+}

@@ -15,11 +15,14 @@ dependencies = [
     "pydantic-settings>=2.0.0",
     "python-dotenv>=1.0.0",
     "python-json-logger>=2.0.0",
+    "pandas>=2.2.0",
+    "pyarrow>=15.0.0",
+    "requests>=2.31.0",
 ]
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["app*"]
+include = ["app*", "pipeline*"]
 
 [project.optional-dependencies]
 dev = [
@@ -29,6 +32,7 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
+pythonpath = ["."]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
@@ -36,7 +40,7 @@ python_functions = ["test_*"]
 addopts = "-v --tb=short"
 
 [tool.coverage.run]
-source = ["app"]
+source = ["app", "pipeline"]
 omit = ["tests/*", "app/__init__.py"]
 
 [tool.coverage.report]

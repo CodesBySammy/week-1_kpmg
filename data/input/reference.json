@@ -1,0 +1,30 @@
+{
+  "dataset_version": "1.0.0",
+  "generated_at": "2026-09-01T00:00:00Z",
+  "departments": [
+    {"department_id": "DEP-INFRA", "department_name": "Platform Infrastructure", "lead_user_id": 1},
+    {"department_id": "DEP-SEC", "department_name": "Information Security", "lead_user_id": 4},
+    {"department_id": "DEP-APPS", "department_name": "Application Engineering", "lead_user_id": 2},
+    {"department_id": "DEP-COMP", "department_name": "Regulatory Compliance", "lead_user_id": 4},
+    {"department_id": "DEP-EXEC", "department_name": "Executive Management", "lead_user_id": 5}
+  ],
+  "users": [
+    {"user_id": 1, "department_id": "DEP-INFRA", "tier": "L3", "region": "APAC", "active": true},
+    {"user_id": 2, "department_id": "DEP-APPS", "tier": "L2", "region": "EMEA", "active": true},
+    {"user_id": 3, "department_id": "DEP-APPS", "tier": "L1", "region": "APAC", "active": true},
+    {"user_id": 4, "department_id": "DEP-SEC", "tier": "L3", "region": "US", "active": true},
+    {"user_id": 5, "department_id": "DEP-EXEC", "tier": "Admin", "region": "GLOBAL", "active": true}
+  ],
+  "priority_weights": {
+    "LOW": 1.0,
+    "MEDIUM": 2.5,
+    "HIGH": 5.0,
+    "CRITICAL": 10.0
+  },
+  "sla_threshold_hours": {
+    "CRITICAL": 4,
+    "HIGH": 24,
+    "MEDIUM": 72,
+    "LOW": 168
+  }
+}
