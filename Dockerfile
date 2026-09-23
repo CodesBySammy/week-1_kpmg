@@ -21,16 +21,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY pyproject.toml .
 COPY .env.example .env
 
-# Install dependencies including pipeline packages
+# Install dependencies including pipeline and RAG packages
 RUN pip install --upgrade pip && \
     pip install "fastapi>=0.115.0" "uvicorn[standard]>=0.30.0" "sqlalchemy>=2.0.0" \
-                "pydantic>=2.0.0" "pydantic-settings>=2.0.0" "python-dotenv>=1.0.0" \
-                "python-json-logger>=2.0.0" "pandas>=2.2.0" "pyarrow>=15.0.0" \
-                "requests>=2.31.0" "pytest>=8.0.0" "pytest-cov>=5.0.0" "httpx>=0.27.0"
+    "pydantic>=2.0.0" "pydantic-settings>=2.0.0" "python-dotenv>=1.0.0" \
+    "python-json-logger>=2.0.0" "pandas>=2.2.0" "pyarrow>=15.0.0" \
+    "requests>=2.31.0" "pytest>=8.0.0" "pytest-cov>=5.0.0" "httpx>=0.27.0" \
+    "rank-bm25>=0.2.2" "pypdf>=5.0.0" "pyyaml>=6.0.0"
 
 # Copy source code and artifacts
 COPY app/ ./app/
 COPY pipeline/ ./pipeline/
+COPY rag/ ./rag/
 COPY sql/ ./sql/
 COPY data/ ./data/
 
@@ -50,4 +52,6 @@ EXPOSE 8000
 # Can be overridden:
 # - Run backend: docker run -p 8000:8000 <image> uvicorn app.main:app --host 0.0.0.0 --port 8000
 # - Run pipeline: docker run <image> python -m pipeline.cli --mode full
+# - Run RAG assistant: docker run <image> python -m rag.cli query "What is the password policy?"
+# - Run RAG evaluation: docker run <image> python -m rag.cli evaluate
 CMD ["python", "-m", "pipeline.cli", "--mode", "full"]

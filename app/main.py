@@ -28,6 +28,7 @@ from fastapi import FastAPI
 
 from app.api.routes.cases import router
 from app.api.routes.mock_api import router as mock_router
+from app.api.routes.rag import router as rag_router
 from app.config import get_settings
 from app.database.session import create_tables
 from app.exceptions.handlers import register_exception_handlers
@@ -91,6 +92,7 @@ register_exception_handlers(app)
 # ── Include Routes ───────────────────────────────────────────────
 app.include_router(router, prefix="/api/v1")
 app.include_router(mock_router, prefix="/api/v1")
+app.include_router(rag_router, prefix="/api/v1")
 
 
 # ── Health Check ─────────────────────────────────────────────────
