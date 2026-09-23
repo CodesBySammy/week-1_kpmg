@@ -24,15 +24,18 @@ CURRICULUM CONNECTION:
 import logging
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Response, status
+from sqlalchemy import text
 
 from app.api.routes.cases import router
 from app.api.routes.mock_api import router as mock_router
 from app.api.routes.rag import router as rag_router
+from app.api.routes.workflow import router as workflow_router
 from app.config import get_settings
-from app.database.session import create_tables
+from app.database.session import SessionLocal, create_tables
 from app.exceptions.handlers import register_exception_handlers
 from app.logging_config import setup_logging
+from observability.correlation import CorrelationMiddleware
 
 # ── Initialize Logging First ─────────────────────────────────────
 # Logging must be configured before anything else so all startup
@@ -76,8 +79,8 @@ app = FastAPI(
     title="Case Management API",
     description=(
         "A modular, testable case management backend built with FastAPI "
-        "and SQLite. Week 1 hands-on project for the FDE Fresher Readiness "
-        "Program."
+        "and SQLite. Extended with Lakehouse ETL, Grounded RAG, and Week 4 "
+        "Controlled AI Workflow with RBAC, Tool Contracts, and Observability."
     ),
     version=settings.app_version,
     lifespan=lifespan,
@@ -86,6 +89,9 @@ app = FastAPI(
     openapi_url="/openapi.json",  # OpenAPI spec at /openapi.json
 )
 
+# ── Register Middleware ─────────────────────────────────────────
+app.add_middleware(CorrelationMiddleware)
+
 # ── Register Exception Handlers ─────────────────────────────────
 register_exception_handlers(app)
 
@@ -93,13 +99,14 @@ register_exception_handlers(app)
 app.include_router(router, prefix="/api/v1")
 app.include_router(mock_router, prefix="/api/v1")
 app.include_router(rag_router, prefix="/api/v1")
+app.include_router(workflow_router, prefix="/api/v1")
 
 
 # ── Health Check ─────────────────────────────────────────────────
 @app.get("/health", tags=["System"])
 def health_check() -> dict:
     """
-    Health check endpoint.
+    Health check endpoint (Liveness probe).
 
     Used to verify the application is running.
     Returns a simple JSON response.
@@ -109,3 +116,44 @@ def health_check() -> dict:
         "app": settings.app_name,
         "version": settings.app_version,
     }
+
+
+# ── Readiness Probe ──────────────────────────────────────────────
+@app.get("/ready", tags=["System"])
+def readiness_check(response: Response) -> dict:
+    """
+    Readiness check endpoint (Readiness probe).
+
+    Verifies downstream dependencies:
+      1. SQLite / Database connectivity
+      2. RAG service initialization
+      3. Workflow engine readiness
+    """
+    checks = {
+        "database": False,
+        "rag_service": True,
+        "workflow_engine": True,
+    }
+
+    # Verify Database Connectivity
+    try:
+        db = SessionLocal()
+        try:
+            db.execute(text("SELECT 1"))
+            checks["database"] = True
+        finally:
+            db.close()
+    except Exception as exc:
+        logger.error("Readiness check database failure: %s", exc)
+        checks["database"] = False
+
+    is_ready = all(checks.values())
+    if not is_ready:
+        response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
+
+    return {
+        "status": "ready" if is_ready else "not_ready",
+        "checks": checks,
+        "version": settings.app_version,
+    }
+

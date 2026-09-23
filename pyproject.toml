@@ -25,7 +25,7 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["app*", "pipeline*", "rag*"]
+include = ["app*", "pipeline*", "rag*", "security*", "tools*", "workflow*", "observability*"]
 
 [project.optional-dependencies]
 dev = [
@@ -43,7 +43,7 @@ python_functions = ["test_*"]
 addopts = "-v --tb=short"
 
 [tool.coverage.run]
-source = ["app", "pipeline", "rag"]
+source = ["app", "pipeline", "rag", "security", "tools", "workflow", "observability"]
 omit = ["tests/*", "app/__init__.py"]
 
 [tool.coverage.report]
