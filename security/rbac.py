@@ -91,3 +91,26 @@ def require_role(principal: UserPrincipal, allowed_roles: List[Union[Role, str]]
             status_code=status.HTTP_403_FORBIDDEN,
             detail=f"Action requires one of roles: {role_strings}. User has role '{principal.role}'.",
         )
+
+
+def check_department_access(principal: UserPrincipal, case_department: str) -> bool:
+    """
+    Checks if a user is permitted to access cases in a specific department (SCR-2026-05).
+    Admins and Managers have cross-department access; agents are restricted to matching departments.
+    """
+    if principal.role.lower() in {Role.ADMIN.value, Role.MANAGER.value, "supervisor"}:
+        return True
+
+    user_dept = (getattr(principal, "department", None) or "SUPPORT").upper()
+    target_dept = (case_department or "SUPPORT").upper()
+
+    return user_dept in {target_dept, "*", "ALL", "GENERAL"}
+
+
+def require_department_access(principal: UserPrincipal, case_department: str):
+    """Enforces department boundary; raises 403 Forbidden on cross-department violation."""
+    if not check_department_access(principal, case_department):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=f"Access denied: User '{principal.username}' cannot access department '{case_department}'.",
+        )

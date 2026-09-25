@@ -13,7 +13,7 @@ from app.database.session import SessionLocal
 from app.exceptions import CaseNotFoundError
 from app.repositories.case_repository import CaseRepository
 from app.schemas.case import CaseUpdate
-from app.models.case import CaseStatus
+from app.models.case import CaseStatus, EscalationTier
 from security.auth import UserPrincipal
 from security.rbac import Permission, check_permission
 from tools.schemas import UpdateTicketInput, UpdateTicketOutput, ToolError
@@ -150,17 +150,40 @@ def update_ticket(
         if params.comment:
             existing_desc = case_entity.description or ""
             updates["description"] = f"{existing_desc}\n[Update Note ({datetime.now(timezone.utc).isoformat()} by {principal.username})]: {params.comment}".strip()
+
+        if params.escalation_tier:
+            try:
+                target_tier = EscalationTier(params.escalation_tier.upper())
+                if target_tier == EscalationTier.CRITICAL_ESC and principal.role not in {"supervisor", "admin"}:
+                    return None, ToolError(
+                        error_code="UNAUTHORIZED_ESCALATION",
+                        message=f"Escalation to CRITICAL_ESC requires supervisor or admin privileges (current role: '{principal.role}').",
+                        details={"required_role": "supervisor", "current_role": principal.role},
+                        retryable=False,
+                    )
+                updates["escalation_tier"] = target_tier
+            except ValueError:
+                return None, ToolError(
+                    error_code="INVALID_ESCALATION_TIER",
+                    message=f"Invalid escalation tier '{params.escalation_tier}'. Allowed values: {[e.value for e in EscalationTier]}",
+                    retryable=False,
+                )
         
         updated_entity = repo.update(db, case_entity, updates)
 
         event_id = f"evt_{uuid.uuid4().hex[:12]}"
         now_iso = datetime.now(timezone.utc).isoformat()
 
+        esc_val = "STANDARD"
+        if hasattr(updated_entity, "escalation_tier") and updated_entity.escalation_tier is not None:
+            esc_val = updated_entity.escalation_tier.value if hasattr(updated_entity.escalation_tier, "value") else str(updated_entity.escalation_tier)
+
         output = UpdateTicketOutput(
             ticket_id=updated_entity.id,
             previous_status=prev_status,
             new_status=updated_entity.status.value if hasattr(updated_entity.status, "value") else str(updated_entity.status),
             comment=params.comment,
+            escalation_tier=esc_val,
             approval_id=params.approval_id,
             updated_by=principal.username,
             updated_at=now_iso,

@@ -68,6 +68,12 @@ def retrieve_case_details(
         if hasattr(case_entity, "case_type") and case_entity.case_type is not None:
             case_type_val = case_entity.case_type.value if hasattr(case_entity.case_type, "value") else str(case_entity.case_type)
 
+        esc_tier = "STANDARD"
+        if hasattr(case_entity, "escalation_tier") and case_entity.escalation_tier is not None:
+            esc_tier = case_entity.escalation_tier.value if hasattr(case_entity.escalation_tier, "value") else str(case_entity.escalation_tier)
+
+        dept_val = getattr(case_entity, "department", "SUPPORT") or "SUPPORT"
+
         output = RetrieveCaseOutput(
             case_id=case_entity.id,
             title=case_entity.title,
@@ -75,6 +81,8 @@ def retrieve_case_details(
             status=case_entity.status.value if hasattr(case_entity.status, "value") else str(case_entity.status),
             priority=case_entity.priority.value if hasattr(case_entity.priority, "value") else str(case_entity.priority),
             case_type=case_type_val,
+            escalation_tier=esc_tier,
+            department=dept_val,
             created_by=case_entity.created_by,
             assigned_to=case_entity.assigned_to,
             created_at=case_entity.created_at.isoformat() if hasattr(case_entity.created_at, "isoformat") else str(case_entity.created_at),

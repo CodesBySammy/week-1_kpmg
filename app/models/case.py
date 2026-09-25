@@ -69,6 +69,13 @@ class CaseType(str, enum.Enum):
     COMPLAINT = "COMPLAINT"
 
 
+class EscalationTier(str, enum.Enum):
+    """SLA escalation tiers introduced in Week 5 (SCR-2026-05)."""
+    STANDARD = "STANDARD"
+    PRIORITY = "PRIORITY"
+    CRITICAL_ESC = "CRITICAL_ESC"
+
+
 # ── User Model ───────────────────────────────────────────────────
 
 
@@ -130,6 +137,12 @@ class Case(Base):
     )
     case_type: str = Column(
         Enum(CaseType), nullable=False, default=CaseType.INQUIRY
+    )
+    escalation_tier: str = Column(
+        Enum(EscalationTier), nullable=False, default=EscalationTier.STANDARD
+    )
+    department: str = Column(
+        String(64), nullable=False, default="SUPPORT"
     )
     created_by: int = Column(
         Integer, ForeignKey("users.id"), nullable=False

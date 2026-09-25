@@ -107,5 +107,21 @@ def create_tables() -> None:
 
     This reads every class that inherits from Base and creates
     the corresponding table if it doesn't exist yet.
+    Also ensures backward-compatible column migration for SQLite.
     """
     Base.metadata.create_all(bind=engine)
+    try:
+        with engine.connect() as conn:
+            cursor = conn.exec_driver_sql("PRAGMA table_info(cases)")
+            cols = [row[1] for row in cursor.fetchall()]
+            if cols and "escalation_tier" not in cols:
+                conn.exec_driver_sql(
+                    "ALTER TABLE cases ADD COLUMN escalation_tier VARCHAR(32) DEFAULT 'STANDARD'"
+                )
+            if cols and "department" not in cols:
+                conn.exec_driver_sql(
+                    "ALTER TABLE cases ADD COLUMN department VARCHAR(64) DEFAULT 'SUPPORT'"
+                )
+            conn.commit()
+    except Exception:
+        pass

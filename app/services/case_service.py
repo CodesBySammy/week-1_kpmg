@@ -30,7 +30,7 @@ from typing import Optional
 from sqlalchemy.orm import Session
 
 from app.exceptions import CaseNotFoundError, UserNotFoundError, ValidationError
-from app.models.case import Case, CaseStatus
+from app.models.case import Case, CaseStatus, EscalationTier
 from app.repositories.case_repository import CaseRepository, UserRepository
 from app.schemas.case import CaseCreate, CaseUpdate
 
@@ -78,6 +78,8 @@ class CaseService:
             description=case_data.description,
             priority=case_data.priority,
             case_type=case_data.case_type,
+            escalation_tier=case_data.escalation_tier or EscalationTier.STANDARD,
+            department=case_data.department or "SUPPORT",
             created_by=case_data.created_by,
             assigned_to=case_data.assigned_to,
             status=CaseStatus.OPEN,

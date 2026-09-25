@@ -101,3 +101,32 @@ class InputGuardrail:
         """
         sanitized = cls.sanitize(text, strict=False).cleaned_text
         return f"<{data_type}>\n{sanitized}\n</{data_type}>"
+
+
+# ─── Module-Level Convenience Functions ──────────────────────────────────────
+
+def detect_prompt_injection(text: str) -> bool:
+    """
+    Returns True if the input contains a known prompt injection pattern.
+    Module-level convenience wrapper around InputGuardrail.check_prompt_injection.
+    """
+    detected, _ = InputGuardrail.check_prompt_injection(text)
+    return detected
+
+
+def validate_input_length(text: str, max_length: int = InputGuardrail.MAX_INPUT_LENGTH) -> bool:
+    """
+    Returns True if input length is within max_length, False otherwise.
+    Module-level convenience wrapper.
+    """
+    return len(text) <= max_length
+
+
+def sanitize_input(text: str) -> str:
+    """
+    Strips control characters from input and returns the cleaned string.
+    Does not raise for injection patterns — use detect_prompt_injection for that.
+    Module-level convenience wrapper around InputGuardrail.sanitize(strict=False).
+    """
+    result = InputGuardrail.sanitize(text, strict=False)
+    return result.cleaned_text

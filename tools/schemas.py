@@ -38,6 +38,8 @@ class RetrieveCaseOutput(BaseModel):
     assigned_to: Optional[int] = None
     created_at: str
     resolved_at: Optional[str] = None
+    escalation_tier: Optional[str] = "STANDARD"
+    department: Optional[str] = "SUPPORT"
     audit_notes: Optional[str] = None
 
 
@@ -56,6 +58,14 @@ class UpdateTicketInput(BaseModel):
     comment: Optional[str] = Field(
         default="Status update",
         description="Justification note for the update",
+    )
+    escalation_tier: Optional[str] = Field(
+        default=None,
+        description="Target escalation tier: 'STANDARD', 'PRIORITY', 'CRITICAL_ESC'",
+    )
+    escalation_reason: Optional[str] = Field(
+        default=None,
+        description="Justification for escalation tier modification",
     )
     approval_id: Optional[str] = Field(
         default=None,
@@ -110,6 +120,7 @@ class UpdateTicketOutput(BaseModel):
     new_status: str
     status: Optional[str] = None
     comment: Optional[str] = None
+    escalation_tier: Optional[str] = None
     approval_id: Optional[str] = None
     updated_by: str
     updated_at: str

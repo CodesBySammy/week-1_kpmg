@@ -32,7 +32,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Field, ConfigDict
 
-from app.models.case import CasePriority, CaseStatus, CaseType
+from app.models.case import CasePriority, CaseStatus, CaseType, EscalationTier
 
 
 # ── Request Schemas ──────────────────────────────────────────────
@@ -77,6 +77,15 @@ class CaseCreate(BaseModel):
         gt=0,
         description="ID of the user assigned to the case",
     )
+    escalation_tier: Optional[EscalationTier] = Field(
+        EscalationTier.STANDARD,
+        description="SLA Escalation Tier",
+    )
+    department: Optional[str] = Field(
+        "SUPPORT",
+        max_length=64,
+        description="Operating Department",
+    )
 
 
 class CaseUpdate(BaseModel):
@@ -114,6 +123,15 @@ class CaseUpdate(BaseModel):
         gt=0,
         description="Updated assignee user ID",
     )
+    escalation_tier: Optional[EscalationTier] = Field(
+        None,
+        description="Updated SLA Escalation Tier",
+    )
+    department: Optional[str] = Field(
+        None,
+        max_length=64,
+        description="Updated Operating Department",
+    )
 
 
 # ── Response Schemas ─────────────────────────────────────────────
@@ -134,6 +152,8 @@ class CaseResponse(BaseModel):
     status: CaseStatus
     priority: CasePriority
     case_type: CaseType
+    escalation_tier: EscalationTier = EscalationTier.STANDARD
+    department: str = "SUPPORT"
     created_by: int
     assigned_to: Optional[int]
     created_at: datetime
