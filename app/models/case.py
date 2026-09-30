@@ -172,7 +172,9 @@ class Case(Base):
     )
 
     def __repr__(self) -> str:
-        return f"<Case(id={self.id}, title='{self.title}', status='{self.status}')>"
+        # Use getattr for .value to handle both enum instances and raw strings
+        _status = getattr(self.status, "value", self.status)
+        return f"<Case(id={self.id}, title='{self.title}', status='{_status}')>"
 
 
 # ── Case History Model ───────────────────────────────────────────

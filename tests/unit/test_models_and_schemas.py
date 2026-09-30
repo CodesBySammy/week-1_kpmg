@@ -18,7 +18,7 @@ def test_model_repr():
     assert "<User(id=1, username='alex')>" == repr(user)
 
     case = Case(id=42, title="Bug Title", status=CaseStatus.OPEN)
-    assert "<Case(id=42, title='Bug Title', status='CaseStatus.OPEN')>" in repr(case)
+    assert "<Case(id=42, title='Bug Title', status='OPEN')" in repr(case)
 
     history = CaseHistory(case_id=42, field_changed="status")
     assert "<CaseHistory(case_id=42, field='status')>" == repr(history)

@@ -30,9 +30,12 @@ def standardize_case_records(df: pd.DataFrame) -> pd.DataFrame:
         if col in cleaned.columns:
             cleaned[col] = cleaned[col].str.upper()
 
-    # 2. Impute null/empty descriptions
+    # 2. Impute null/empty descriptions (including 'None' / 'nan' from string conversion)
     if "description" in cleaned.columns:
-        empty_mask = (cleaned["description"] == "") | cleaned["description"].isna()
+        empty_mask = (
+            cleaned["description"].isna()
+            | cleaned["description"].isin(["", "None", "nan", "null"])
+        )
         cleaned.loc[empty_mask, "description"] = "No description provided"
 
     # 3. Cast numeric identifiers
