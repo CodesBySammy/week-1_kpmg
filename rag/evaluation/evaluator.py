@@ -2,7 +2,7 @@
 RAG Evaluator and Benchmark Comparison Runner.
 Runs structured evaluation comparing Vector-only vs Hybrid+Reranking.
 """
-from typing import List, Dict, Any, Set, Tuple
+from typing import List, Dict, Any, Set, Tuple, Optional
 from pydantic import BaseModel, Field
 import time
 
